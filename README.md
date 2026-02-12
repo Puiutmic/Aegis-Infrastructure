@@ -1,6 +1,6 @@
 # Aegis: My Over-Engineered Home Lab
 
-![Aegis Architecture](Aegis.jpg)
+![Aegis Architecture](Aegis.png)
 
 ### Hi, I'm David 
 I'm a Cybernetics Student at ASE Bucharest with a passion for DevOps and Infrastructure.
