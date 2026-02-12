@@ -1,7 +1,5 @@
 # Aegis: My Over-Engineered Home Lab
 
-![Aegis Architecture](Aegis.png)
-
 ### Hi, I'm David 
 I'm a Cybernetics Student at ASE Bucharest with a passion for DevOps and Infrastructure.
 
@@ -22,6 +20,8 @@ Running a full monitoring stack + web services on a dual-core CPU from 2014 forc
 ## Architecture & Tech Stack
 
 Everything runs on **Ubuntu Server**, orchestrated via **Docker Compose**.
+
+![Aegis Architecture](Aegis.png)
 
 ### Security & Networking (Zero-Trust)
 I didn't want to expose my home router to the internet via Port Forwarding. It felt unsafe.
