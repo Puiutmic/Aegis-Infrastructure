@@ -1,0 +1,27 @@
+{
+  "//": "Tailscale Access Control List (ACL) for Aegis Home Lab",
+  "//": "Implements Zero-Trust principles with specific ingress rules",
+
+  "acls": [
+    {
+      "//": "Allow admin devices full access to the server",
+      "action": "accept",
+      "src": ["tag:admin-devices"],
+      "dst": ["tag:server:*"]
+    },
+    {
+      "//": "Deny all other traffic by default ",
+      "action": "accept",
+      "src": ["*"],
+      "dst": ["*:0"]
+    }
+  ],
+
+  "nodeAttrs": [
+    {
+      "//": "Grant funnel capability to expose Nginx to public internet",
+      "target": ["autogroup:member"],
+      "attr": ["funnel"]
+    }
+  ]
+}
