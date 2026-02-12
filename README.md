@@ -5,6 +5,8 @@ I'm a Cybernetics Student at ASE Bucharest with a passion for DevOps and Infrast
 
 "Aegis" is my attempt to build a production-grade infrastructure on hardware that belongs in a museum. Instead of paying for cloud credits, I wanted to learn how to secure, monitor, and automate a server from scratch, dealing with real-world constraints like limited RAM and CPU cycles.
 
+![Aegis Architecture](Aegis.png)
+
 ---
 
 ## Why I built this?
@@ -13,15 +15,31 @@ I wanted to move beyond "it works on my machine." My goal was to create a server
 2.  **Self-healing** (Automated maintenance).
 3.  **Visible** (If it breaks, I want to see a graph of *why*).
 
+
 ## The Hardware (The Real Challenge)
 The heart of this operation is an **Intel Pentium G3258** with **4GB of RAM**.
 Running a full monitoring stack + web services on a dual-core CPU from 2014 forced me to be extremely efficient with Docker resource limits and image optimization.
+
 
 ## Architecture & Tech Stack
 
 Everything runs on **Ubuntu Server**, orchestrated via **Docker Compose**.
 
-![Aegis Architecture](Aegis.png)
+
+## Proof of Concept
+
+### 1. Observability (Grafana Dashboard)
+*Real-time metrics showing CPU usage and memory optimization on the 4GB RAM host.*
+![Grafana Dashboard](screenshots/grafana_dash.png)
+
+### 2. Zero-Trust Network (Tailscale Mesh)
+*Aegis connected securely via VPN, isolated from public internet exposure.*
+![Tailscale Network](screenshots/tailscale_admin.png)
+
+### 3. Resource Management
+*Running 6 containers with <600MB total system RAM usage. Evidence of optimization on legacy hardware.*
+![Terminal Stats](screenshots/terminal_stats.png)
+
 
 ### Security & Networking (Zero-Trust)
 I didn't want to expose my home router to the internet via Port Forwarding. It felt unsafe.
@@ -29,11 +47,13 @@ I didn't want to expose my home router to the internet via Port Forwarding. It f
 * **ACLs (Access Control Lists):** I configured strict rules. My phone can see the dashboard, but public traffic can *only* hit the specific web container.
 * **The "Funnel":** I use Tailscale Funnel as an ingress controller to expose internal apps securely via HTTPS without messing with dynamic DNS or router configs.
 
+
 ### Observability (My Favorite Part)
 I need to know if the Pentium is melting.
 * **Prometheus** scrapes metrics every 15 seconds.
 * **Grafana** visualizes CPU load, RAM usage, and container health.
 * **Node Exporter** gives me the raw hardware data.
+
 
 ### Automation
 I wrote Bash scripts (managed by Cron) to handle the boring stuff:
@@ -46,6 +66,7 @@ I wrote Bash scripts (managed by Cron) to handle the boring stuff:
 * **The "OOM" Killer:** Initially, Grafana + Prometheus ate all the RAM. I had to tweak the scraping intervals and retention policies to make it stable on 4GB.
 * **Public Access:** I wanted to host a static site for a project (Valentine's Day surprise), but keeping it secure was tricky. I used **Tailscale Funnel** to isolate that specific container from the rest of my internal network.
 
+
 ## How to run it
 If you have an old laptop or PC gathering dust, here is how you can replicate my stack:
 
@@ -55,3 +76,4 @@ git clone [https://github.com/Puiutmic/aegis-infrastructure.git](https://github.
 
 # Spin up the containers
 docker compose up -d
+```
