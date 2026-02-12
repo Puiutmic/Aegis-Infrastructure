@@ -1,4 +1,4 @@
-# 🛡️ Aegis: My Over-Engineered Home Lab
+# Aegis: My Over-Engineered Home Lab
 
 ![Aegis Architecture](Aegis.jpg)
 
