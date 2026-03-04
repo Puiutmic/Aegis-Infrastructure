@@ -78,7 +78,7 @@ services:
     volumes:
       - ./www:/usr/share/nginx/html:ro
     ports:
-      - "8080:80" # Singurul port expus public în rețea
+      - "8080:80"
 
 volumes:
   prometheus-data:
